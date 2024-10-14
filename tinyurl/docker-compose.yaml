@@ -1,0 +1,24 @@
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/db:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=P@assw0rd
+
+  # go-app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: go-app
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - mongodb
+  #   environment:
+  #     - MONGO_URI=mongodb://root:P@assw0rd@mongodb:27017
+  #   command: go run main.go

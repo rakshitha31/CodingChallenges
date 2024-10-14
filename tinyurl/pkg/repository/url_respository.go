@@ -8,8 +8,10 @@ import (
 	"fmt"
 	"log"
 	"net/url"
+	"os"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/rakshitha31/urlshortnerchallenge/pkg/model"
 	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo"
@@ -17,8 +19,9 @@ import (
 )
 
 func ConnectToDB() *mongo.Client {
-	username := "root"
-	password := "P@assw0rd"
+	godotenv.Load(".env")
+	username := os.Getenv("MONGO_USERNAME")
+	password := os.Getenv("MONGO_PASSWORD")
 	escapedPassword := url.QueryEscape(password)
 	// Construct the connection URI
 	uri := fmt.Sprintf("mongodb://%s:%s@localhost:27017", username, escapedPassword)
